@@ -1,15 +1,16 @@
 const express = require('express'),
     bodyParser = require('body-parser'),
-    // In order to use PUT HTTP verb to edit item
     methodOverride = require('method-override'),
-    // Mitigate XSS using sanitizer
     sanitizer = require('sanitizer'),
     app = express(),
-    port = 8000
+    port = 8000;
+
+app.set('views', '/apps/view'); // Add this line!
 
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 // https: //github.com/expressjs/method-override#custom-logic
 app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
